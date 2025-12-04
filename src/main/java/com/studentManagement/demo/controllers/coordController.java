@@ -1,2 +1,4 @@
-package com.studentManagement.demo.controllers;public class coordController {
+package com.studentManagement.demo.controllers;
+
+public class coordController {
 }

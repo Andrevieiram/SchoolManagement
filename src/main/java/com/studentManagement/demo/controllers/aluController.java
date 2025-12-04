@@ -1,2 +1,4 @@
-package com.studentManagement.demo.controllers;public class alunoController {
+package com.studentManagement.demo.controllers;
+
+public class aluController {
 }

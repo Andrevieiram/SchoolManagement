@@ -1,2 +1,4 @@
-package com.studentManagement.demo.services;public class coordService {
+package com.studentManagement.demo.services;
+
+public class coordService {
 }

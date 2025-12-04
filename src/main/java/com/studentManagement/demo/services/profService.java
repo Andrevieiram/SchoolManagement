@@ -1,2 +1,4 @@
-package com.studentManagement.demo.services;public class ProfService {
+package com.studentManagement.demo.services;
+
+public class profService {
 }

@@ -1,2 +1,4 @@
-package com.studentManagement.demo.controllers;public class professorController {
+package com.studentManagement.demo.controllers;
+
+public class profController {
 }
