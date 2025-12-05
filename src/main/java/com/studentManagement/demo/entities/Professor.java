@@ -11,35 +11,34 @@ import java.util.Set;
 
 @Data
 @Entity
-@PrimaryKeyJoinColumn(name = "idpessoa")
-@Table(name = "professor")
-public class Professor extends Pessoa {
+@Table(name = "professores")
+public class Professor  {
 
+    @Id
     @Column(name = "idprof")
-    private String idProf;
+    private String id;
 
-    @Column(name = "area")
     private String area;
 
-    // Relação com ProfessorDisciplina
-    @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProfessorDisciplina> professorDisciplinas;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cpf_prof", referencedColumnName = "cpf")
+    private Pessoa pessoa;
 
-    public Professor(String idProf, String area, Set<ProfessorDisciplina> professorDisciplinas) {
-        this.idProf = idProf;
+    public Professor(String id, String area, Pessoa pessoa) {
+        this.id = id;
         this.area = area;
-        this.professorDisciplinas = professorDisciplinas;
+        this.pessoa = pessoa;
     }
 
     public Professor() {
     }
 
-    public String getIdProf() {
-        return idProf;
+    public String getId() {
+        return id;
     }
 
-    public void setIdProf(String idProf) {
-        this.idProf = idProf;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getArea() {
@@ -50,11 +49,11 @@ public class Professor extends Pessoa {
         this.area = area;
     }
 
-    public Set<ProfessorDisciplina> getProfessorDisciplinas() {
-        return professorDisciplinas;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setProfessorDisciplinas(Set<ProfessorDisciplina> professorDisciplinas) {
-        this.professorDisciplinas = professorDisciplinas;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 }

@@ -7,39 +7,48 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@PrimaryKeyJoinColumn(name = "idpessoa")
 @Table(name = "coordenadores")
-public class Coordenador extends Pessoa {
+public class Coordenador {
 
+    @Id
     @Column(name = "idcoord")
-    private String idCoord;
+    private String id;
 
-    // Relação com curso
-    @OneToOne
-    @JoinColumn(name = "curso_id")
-    private Curso curso;
+    @Column(name = "curso_id", nullable = true)
+    private Integer cursoId;
 
-    public Coordenador(String idCoord, Curso curso) {
-        this.idCoord = idCoord;
-        this.curso = curso;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pessoa_id", referencedColumnName = "cpf")
+    private Pessoa pessoa;
+
+    public Coordenador(String id) {
+        this.id = id;
     }
 
     public Coordenador() {
     }
 
-    public String getIdCoord() {
-        return idCoord;
+    public String getId() {
+        return id;
     }
 
-    public void setIdCoord(String idCoord) {
-        this.idCoord = idCoord;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Curso getCurso() {
-        return curso;
+    public Integer getCursoId() {
+        return cursoId;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setCursoId(Integer cursoId) {
+        this.cursoId = cursoId;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 }

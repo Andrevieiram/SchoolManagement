@@ -3,34 +3,27 @@ package com.studentManagement.demo.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Data
 @Entity
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "pessoa")
-public abstract class Pessoa {
+public class Pessoa {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idpessoa")
-    private Integer idPessoa;
-
-    @Column(name = "nome")
-    private String nome;
-    @Column(name = "telefone")
-    private String telefone;
-    @Column(name = "email")
-    private String email;
     @Column(name = "cpf")
     private String cpf;
 
+    private String nome;
+    private String email;
+    private String telefone;
 
-    public Integer getIdPessoa() {
-        return idPessoa;
+
+    public String getId() {
+        return cpf;
     }
 
-    public void setIdPessoa(Integer idPessoa) {
-        this.idPessoa = idPessoa;
+    public void setId(String idPessoa) {
+        this.cpf = idPessoa;
     }
 
     public String getNome() {
@@ -57,11 +50,5 @@ public abstract class Pessoa {
         this.email = email;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
 }
