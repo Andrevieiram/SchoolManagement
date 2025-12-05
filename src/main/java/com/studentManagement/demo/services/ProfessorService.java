@@ -34,7 +34,7 @@ public class ProfessorService {
     }
 
 
-    public Optional<ProfessorDTO> buscarPorId(Long id) {
+    public Optional<ProfessorDTO> buscarPorId(String id) {
         Optional<Professor> professor = professorDAO.findById(id);
         return professor.map(ProfessorMapper::toDTO);
     }
@@ -65,7 +65,7 @@ public class ProfessorService {
     }
 
 
-    public Optional<ProfessorDTO> atualizar(Long id, ProfessorDTO professorDTO) {
+    public Optional<ProfessorDTO> atualizar(String id, ProfessorDTO professorDTO) {
         if (!professorDAO.findById(id).isPresent()) {
             return Optional.empty();
         }
@@ -77,7 +77,7 @@ public class ProfessorService {
     }
 
 
-    public boolean excluir(Long id) {
+    public boolean excluir(String id) {
         Optional<Professor> professor = professorDAO.findById(id);
         if (professor.isPresent()) {
             professorDAO.delete(id);
@@ -86,7 +86,7 @@ public class ProfessorService {
         return false;
     }
 
-    public boolean associarDisciplina(Long idProfessor, Long idDisciplina, LocalDate dataAssociacao) {
+    public boolean associarDisciplina(String idProfessor, Integer idDisciplina, LocalDate dataAssociacao) {
         Optional<Professor> professorOpt = professorDAO.findById(idProfessor);
         Optional<Disciplina> disciplinaOpt = disciplinaDAO.findById(idDisciplina);
 
@@ -107,7 +107,7 @@ public class ProfessorService {
     }
 
 
-    public boolean desassociarDisciplina(Long idProfessor, Long idDisciplina) {
+    public boolean desassociarDisciplina(String idProfessor, Integer idDisciplina) {
         try {
             // Buscar a associação
             List<ProfessorDisciplina> associacoes = professorDisciplinaDAO.findByProfessorId(idProfessor)
@@ -132,7 +132,7 @@ public class ProfessorService {
     }
 
 
-    public List<DisciplinaSimplificadaDTO> buscarDisciplinasDoProfessor(Long idProfessor) {
+    public List<DisciplinaSimplificadaDTO> buscarDisciplinasDoProfessor(String idProfessor) {
         List<ProfessorDisciplina> associacoes = professorDisciplinaDAO.findByProfessorId(idProfessor);
 
         return associacoes.stream().map(pd -> {

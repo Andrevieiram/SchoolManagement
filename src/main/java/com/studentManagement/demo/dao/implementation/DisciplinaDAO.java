@@ -31,7 +31,7 @@ public class DisciplinaDAO {
     }
 
 
-    public Optional<Disciplina> findById(Long id) {
+    public Optional<Disciplina> findById(Integer id) {
         EntityManager em = DB.openConnection();
         try {
             Disciplina disciplina = em.find(Disciplina.class, id);

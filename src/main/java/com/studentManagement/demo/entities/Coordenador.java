@@ -7,14 +7,39 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "coordenador")
+@PrimaryKeyJoinColumn(name = "idpessoa")
+@Table(name = "coordenadores")
 public class Coordenador extends Pessoa {
 
     @Column(name = "idcoord")
-    private Long idCoord;
+    private String idCoord;
 
     // Relação com curso
     @OneToOne
     @JoinColumn(name = "curso_id")
     private Curso curso;
+
+    public Coordenador(String idCoord, Curso curso) {
+        this.idCoord = idCoord;
+        this.curso = curso;
+    }
+
+    public Coordenador() {
+    }
+
+    public String getIdCoord() {
+        return idCoord;
+    }
+
+    public void setIdCoord(String idCoord) {
+        this.idCoord = idCoord;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
 }

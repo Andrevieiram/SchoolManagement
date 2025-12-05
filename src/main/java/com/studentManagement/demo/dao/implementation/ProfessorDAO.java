@@ -33,7 +33,7 @@ public class ProfessorDAO {
         }
     }
 
-    public Optional<Professor> findById(Long id) {
+    public Optional<Professor> findById(String id) {
         EntityManager em = DB.openConnection();
         try {
             Professor professor = em.find(Professor.class, id);
@@ -53,7 +53,7 @@ public class ProfessorDAO {
         }
     }
 
-    public void delete(Long id) {
+    public void delete(String id) {
         EntityManager em = DB.openConnection();
         try {
             em.getTransaction().begin();

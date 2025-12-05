@@ -30,7 +30,7 @@ public class ProfessorController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProfessorDTO> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<ProfessorDTO> buscarPorId(@PathVariable String id) {
         Optional<ProfessorDTO> professor = professorService.buscarPorId(id);
         return professor.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -67,7 +67,7 @@ public class ProfessorController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProfessorDTO> atualizar(@PathVariable Long id, @RequestBody ProfessorDTO professorDTO) {
+    public ResponseEntity<ProfessorDTO> atualizar(@PathVariable String id, @RequestBody ProfessorDTO professorDTO) {
         Optional<ProfessorDTO> professorAtualizado = professorService.atualizar(id, professorDTO);
         return professorAtualizado.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -75,7 +75,7 @@ public class ProfessorController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+    public ResponseEntity<Void> excluir(@PathVariable String id) {
         boolean excluido = professorService.excluir(id);
         return excluido ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
@@ -83,8 +83,8 @@ public class ProfessorController {
 
     @PostMapping("/{idProfessor}/disciplinas/{idDisciplina}")
     public ResponseEntity<Void> associarDisciplina(
-            @PathVariable Long idProfessor,
-            @PathVariable Long idDisciplina,
+            @PathVariable String idProfessor,
+            @PathVariable Integer idDisciplina,
             @RequestParam(required = false) LocalDate dataAssociacao) {
 
         // Se data não for fornecida, usa a data atual
@@ -107,8 +107,8 @@ public class ProfessorController {
 
     @DeleteMapping("/{idProfessor}/disciplinas/{idDisciplina}")
     public ResponseEntity<Void> desassociarDisciplina(
-            @PathVariable Long idProfessor,
-            @PathVariable Long idDisciplina) {
+            @PathVariable String idProfessor,
+            @PathVariable Integer idDisciplina) {
 
         boolean desassociado = professorService.desassociarDisciplina(idProfessor, idDisciplina);
         return desassociado ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
@@ -117,7 +117,7 @@ public class ProfessorController {
 
     @GetMapping("/{idProfessor}/disciplinas")
     public ResponseEntity<List<DisciplinaSimplificadaDTO>> buscarDisciplinasDoProfessor(
-            @PathVariable Long idProfessor) {
+            @PathVariable String idProfessor) {
 
         if (!professorService.buscarPorId(idProfessor).isPresent()) {
             return ResponseEntity.notFound().build();

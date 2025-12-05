@@ -36,7 +36,7 @@ public class CursoDAO {
     /**
      * Busca curso por ID
      */
-    public Optional<Curso> findById(Long id) {
+    public Optional<Curso> findById(String id) {
         EntityManager em = DB.openConnection();
         try {
             Curso curso = em.find(Curso.class, id);

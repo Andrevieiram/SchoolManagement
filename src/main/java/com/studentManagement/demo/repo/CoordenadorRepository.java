@@ -9,17 +9,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CoordenadorRepository extends JpaRepository<Coordenador, Long> {
+public interface CoordenadorRepository extends JpaRepository<Coordenador, String> {
 
     // Buscar por nome (usando o nome da pessoa)
     @Query("SELECT c FROM Coordenador c WHERE c.nome LIKE %:nome%")
     List<Coordenador> findByNomeContaining(@Param("nome") String nome);
+
 
     // Buscar por CPF
     @Query("SELECT c FROM Coordenador c WHERE c.cpf = :cpf")
     Optional<Coordenador> findByCpf(@Param("cpf") String cpf);
 
     // Verificar se existe coordenador para um curso
-    boolean existsByCursoId(Long cursoId);
+    static Optional<Coordenador> findByCursoIdCurso(String idCurso) {
+        return null;
+    }
 
 }

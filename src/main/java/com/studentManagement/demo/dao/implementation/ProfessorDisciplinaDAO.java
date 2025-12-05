@@ -80,7 +80,7 @@ public class ProfessorDisciplinaDAO {
     }
 
 
-    public List<ProfessorDisciplina> findByProfessorId(Long idProf) {
+    public List<ProfessorDisciplina> findByProfessorId(String idProf) {
         EntityManager em = DB.openConnection();
         try {
             TypedQuery<ProfessorDisciplina> query = em.createQuery(
@@ -94,7 +94,7 @@ public class ProfessorDisciplinaDAO {
     }
 
 
-    public List<ProfessorDisciplina> findByDisciplinaId(Long idDisc) {
+    public List<ProfessorDisciplina> findByDisciplinaId(Integer idDisc) {
         EntityManager em = DB.openConnection();
         try {
             TypedQuery<ProfessorDisciplina> query = em.createQuery(
@@ -137,7 +137,7 @@ public class ProfessorDisciplinaDAO {
     }
 
 
-    public boolean existsAssociacao(Long idProf, Long idDisc) {
+    public boolean existsAssociacao(String idProf, Integer idDisc) {
         EntityManager em = DB.openConnection();
         try {
             TypedQuery<Long> query = em.createQuery(
@@ -153,7 +153,7 @@ public class ProfessorDisciplinaDAO {
     }
 
 
-    public Long countDisciplinasByProfessor(Long idProf) {
+    public Long countDisciplinasByProfessor(String idProf) {
         EntityManager em = DB.openConnection();
         try {
             TypedQuery<Long> query = em.createQuery(
@@ -167,7 +167,7 @@ public class ProfessorDisciplinaDAO {
     }
 
 
-    public Long countProfessoresByDisciplina(Long idDisc) {
+    public Long countProfessoresByDisciplina(Integer idDisc) {
         EntityManager em = DB.openConnection();
         try {
             TypedQuery<Long> query = em.createQuery(
@@ -181,7 +181,7 @@ public class ProfessorDisciplinaDAO {
     }
 
 
-    public boolean atualizarDataAssociacao(Long idProf, Long idDisc, LocalDate novaData) {
+    public boolean atualizarDataAssociacao(String idProf, Integer idDisc, LocalDate novaData) {
         EntityManager em = DB.openConnection();
         try {
             em.getTransaction().begin();
@@ -238,7 +238,7 @@ public class ProfessorDisciplinaDAO {
     }
 
 
-    public int deleteByProfessorId(Long idProf) {
+    public int deleteByProfessorId(String idProf) {
         EntityManager em = DB.openConnection();
         try {
             em.getTransaction().begin();
@@ -257,7 +257,7 @@ public class ProfessorDisciplinaDAO {
     }
 
 
-    public int deleteByDisciplinaId(Long idDisc) {
+    public int deleteByDisciplinaId(Integer idDisc) {
         EntityManager em = DB.openConnection();
         try {
             em.getTransaction().begin();

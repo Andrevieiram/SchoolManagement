@@ -10,7 +10,7 @@ public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idcurso")
-    private Long idCurso;
+    private Integer idCurso;
 
     @Column(name = "nomecurso")
     private String nomeCurso;
@@ -19,4 +19,36 @@ public class Curso {
     @OneToOne(mappedBy = "curso")
     private Coordenador coordenador;
 
+    public Curso(Integer idCurso, String nomeCurso, Coordenador coordenador) {
+        this.idCurso = idCurso;
+        this.nomeCurso = nomeCurso;
+        this.coordenador = coordenador;
+    }
+
+    public Curso() {
+    }
+
+    public Integer getIdCurso() {
+        return idCurso;
+    }
+
+    public void setIdCurso(Integer idCurso) {
+        this.idCurso = idCurso;
+    }
+
+    public String getNomeCurso() {
+        return nomeCurso;
+    }
+
+    public void setNomeCurso(String nomeCurso) {
+        this.nomeCurso = nomeCurso;
+    }
+
+    public Coordenador getCoordenador() {
+        return coordenador;
+    }
+
+    public void setCoordenador(Coordenador coordenador) {
+        this.coordenador = coordenador;
+    }
 }

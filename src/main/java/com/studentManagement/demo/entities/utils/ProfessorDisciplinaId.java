@@ -10,9 +10,32 @@ import java.io.Serializable;
 public class ProfessorDisciplinaId implements Serializable {
 
     @Column(name = "idprof")
-    private Long idProf;
+    private String idProf;
 
     @Column(name = "iddisc")
-    private Long idDisc;
+    private Integer idDisc;
 
+    public ProfessorDisciplinaId(String idProf, Integer idDisc) {
+        this.idProf = idProf;
+        this.idDisc = idDisc;
+    }
+
+    public ProfessorDisciplinaId() {
+    }
+
+    public String getIdProf() {
+        return idProf;
+    }
+
+    public void setIdProf(String idProf) {
+        this.idProf = idProf;
+    }
+
+    public Integer getIdDisc() {
+        return idDisc;
+    }
+
+    public void setIdDisc(Integer idDisc) {
+        this.idDisc = idDisc;
+    }
 }

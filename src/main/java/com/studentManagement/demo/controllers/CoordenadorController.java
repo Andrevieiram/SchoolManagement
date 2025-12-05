@@ -28,7 +28,7 @@ public class CoordenadorController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<CoordenadorDTO> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<CoordenadorDTO> buscarPorId(@PathVariable String id) {
         Optional<CoordenadorDTO> coordenador = coordenadorService.buscarPorId(id);
         return coordenador.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -36,7 +36,7 @@ public class CoordenadorController {
 
 
     @GetMapping("/coord/{idCoord}")
-    public ResponseEntity<CoordenadorDTO> buscarPorIdCoord(@PathVariable Long idCoord) {
+    public ResponseEntity<CoordenadorDTO> buscarPorIdCoord(@PathVariable String idCoord) {
         Optional<CoordenadorDTO> coordenador = coordenadorService.buscarPorIdCoord(idCoord);
         return coordenador.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -44,7 +44,7 @@ public class CoordenadorController {
 
 
     @GetMapping("/curso/{cursoId}")
-    public ResponseEntity<CoordenadorDTO> buscarPorCursoId(@PathVariable Long cursoId) {
+    public ResponseEntity<CoordenadorDTO> buscarPorCursoId(@PathVariable String cursoId) {
         Optional<CoordenadorDTO> coordenador = coordenadorService.buscarPorCursoId(cursoId);
         return coordenador.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -74,7 +74,7 @@ public class CoordenadorController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<CoordenadorDTO> atualizar(@PathVariable Long id, @RequestBody CoordenadorDTO coordenadorDTO) {
+    public ResponseEntity<CoordenadorDTO> atualizar(@PathVariable String id, @RequestBody CoordenadorDTO coordenadorDTO) {
         Optional<CoordenadorDTO> coordenadorAtualizado = coordenadorService.atualizar(id, coordenadorDTO);
         return coordenadorAtualizado.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -82,7 +82,7 @@ public class CoordenadorController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+    public ResponseEntity<Void> excluir(@PathVariable String id) {
         boolean excluido = coordenadorService.excluir(id);
         return excluido ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
@@ -90,8 +90,8 @@ public class CoordenadorController {
 
     @PostMapping("/{idCoord}/cursos/{idCurso}")
     public ResponseEntity<Void> associarCurso(
-            @PathVariable Long idCoord,
-            @PathVariable Long idCurso) {
+            @PathVariable String idCoord,
+            @PathVariable String idCurso) {
 
         boolean associado = coordenadorService.associarCurso(idCoord, idCurso);
 
@@ -109,14 +109,14 @@ public class CoordenadorController {
 
 
     @DeleteMapping("/{idCoord}/cursos")
-    public ResponseEntity<Void> desassociarCurso(@PathVariable Long idCoord) {
+    public ResponseEntity<Void> desassociarCurso(@PathVariable String idCoord) {
         boolean desassociado = coordenadorService.desassociarCurso(idCoord);
         return desassociado ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
 
     @GetMapping("/{idCoord}/associado")
-    public ResponseEntity<Boolean> verificarAssociacaoCurso(@PathVariable Long idCoord) {
+    public ResponseEntity<Boolean> verificarAssociacaoCurso(@PathVariable String idCoord) {
         boolean associado = coordenadorService.isAssociadoACurso(idCoord);
         return ResponseEntity.ok(associado);
     }

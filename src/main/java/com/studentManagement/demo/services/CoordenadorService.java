@@ -7,6 +7,7 @@ import com.studentManagement.demo.dtos.CursoSimplificadoDTO;
 import com.studentManagement.demo.entities.Coordenador;
 import com.studentManagement.demo.entities.Curso;
 import com.studentManagement.demo.dtos.mapper.CoordenadorMapper;
+import com.studentManagement.demo.repo.CoordenadorRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,20 +29,20 @@ public class CoordenadorService {
     }
 
 
-    public Optional<CoordenadorDTO> buscarPorId(Long id) {
+    public Optional<CoordenadorDTO> buscarPorId(String id) {
         Optional<Coordenador> coordenador = coordenadorDAO.findById(id);
         return coordenador.map(CoordenadorMapper::toDTO);
     }
 
 
-    public Optional<CoordenadorDTO> buscarPorIdCoord(Long idCoord) {
+    public Optional<CoordenadorDTO> buscarPorIdCoord(String idCoord) {
         Optional<Coordenador> coordenador = coordenadorDAO.findByIdCoord(idCoord);
         return coordenador.map(CoordenadorMapper::toDTO);
     }
 
 
-    public Optional<CoordenadorDTO> buscarPorCursoId(Long cursoId) {
-        Optional<Coordenador> coordenador = coordenadorDAO.findByCursoId(cursoId);
+    public Optional<CoordenadorDTO> buscarPorCursoId(String cursoId) {
+        Optional<Coordenador> coordenador = CoordenadorRepository.findByCursoIdCurso(cursoId);
         return coordenador.map(CoordenadorMapper::toDTO);
     }
 
@@ -65,7 +66,7 @@ public class CoordenadorService {
     }
 
 
-    public Optional<CoordenadorDTO> atualizar(Long id, CoordenadorDTO coordenadorDTO) {
+    public Optional<CoordenadorDTO> atualizar(String id, CoordenadorDTO coordenadorDTO) {
         if (!coordenadorDAO.findById(id).isPresent()) {
             return Optional.empty();
         }
@@ -77,7 +78,7 @@ public class CoordenadorService {
     }
 
 
-    public boolean excluir(Long id) {
+    public boolean excluir(String id) {
         Optional<Coordenador> coordenador = coordenadorDAO.findById(id);
         if (coordenador.isPresent()) {
             coordenadorDAO.delete(id);
@@ -86,7 +87,7 @@ public class CoordenadorService {
         return false;
     }
 
-    public boolean associarCurso(Long idCoord, Long idCurso) {
+    public boolean associarCurso(String idCoord, String idCurso) {
         Optional<Coordenador> coordenadorOpt = coordenadorDAO.findById(idCoord);
         Optional<Curso> cursoOpt = cursoDAO.findById(idCurso);
 
@@ -113,7 +114,7 @@ public class CoordenadorService {
     }
 
 
-    public boolean desassociarCurso(Long idCoord) {
+    public boolean desassociarCurso(String idCoord) {
         Optional<Coordenador> coordenadorOpt = coordenadorDAO.findById(idCoord);
 
         if (coordenadorOpt.isPresent() && coordenadorOpt.get().getCurso() != null) {
@@ -136,7 +137,7 @@ public class CoordenadorService {
         return false;
     }
 
-    public boolean isAssociadoACurso(Long idCoord) {
+    public boolean isAssociadoACurso(String idCoord) {
         return coordenadorDAO.isAssociadoACurso(idCoord);
     }
 }
