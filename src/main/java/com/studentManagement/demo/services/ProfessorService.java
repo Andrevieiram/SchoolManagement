@@ -1,12 +1,10 @@
 package com.studentManagement.demo.services;
 
-import com.studentManagement.demo.entities.Coordenador;
 import com.studentManagement.demo.entities.Professor;
 import com.studentManagement.demo.repo.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -27,11 +25,34 @@ public class ProfessorService {
         return repository.save(p);
     }
 
-    public Optional<Professor> buscarPorId(String id) {
-        return repository.findById(id);
+    public Professor buscarPorId(String id) {
+        return repository.findById(id).orElse(null);
     }
 
     public void deletar(String id) {
-        repository.deleteById(id);
+        Professor prof = repository.findById(id).orElse(null);
+
+        if (prof != null) {
+            String idProfessor = prof.getId();
+
+            repository.deletarProfessorNaMarra(idProfessor);
+
+
+        }else{
+            throw new RuntimeException("Professor não existe");
+        }
+    }
+
+    public Professor atualizar(String id, Professor professorAtualizado) {
+        Professor professorExistente = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Professor não encontrado"));
+
+        if (professorAtualizado.getPessoa() != null) {
+            professorExistente.getPessoa().setNome(professorAtualizado.getPessoa().getNome());
+            professorExistente.getPessoa().setEmail(professorAtualizado.getPessoa().getEmail());
+            professorExistente.getPessoa().setTelefone(professorAtualizado.getPessoa().getTelefone());
+
+        }
+        return repository.save(professorExistente);
     }
 }

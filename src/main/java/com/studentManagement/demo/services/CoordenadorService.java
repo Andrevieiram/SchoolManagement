@@ -37,4 +37,21 @@ public class CoordenadorService {
     public void deletar(String id) {
         repository.deleteById(id);
     }
+
+    public Coordenador atualizar(String id, Coordenador coordenadorAtualizado) {
+        Coordenador coordenadorExistente = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Coordenador não encontrado"));
+
+        if (coordenadorAtualizado.getPessoa() != null) {
+            coordenadorExistente.getPessoa().setNome(coordenadorAtualizado.getPessoa().getNome());
+            coordenadorExistente.getPessoa().setEmail(coordenadorAtualizado.getPessoa().getEmail());
+            coordenadorExistente.getPessoa().setTelefone(coordenadorAtualizado.getPessoa().getTelefone());
+        }
+
+        if (coordenadorAtualizado.getCursoId() != null) {
+            coordenadorExistente.setCursoId(coordenadorAtualizado.getCursoId());
+        }
+
+        return repository.save(coordenadorExistente);
+    }
 }

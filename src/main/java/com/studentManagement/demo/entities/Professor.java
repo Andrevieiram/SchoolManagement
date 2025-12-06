@@ -20,7 +20,7 @@ public class Professor  {
 
     private String area;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "cpf_prof", referencedColumnName = "cpf")
     private Pessoa pessoa;
 

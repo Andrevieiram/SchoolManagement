@@ -26,6 +26,14 @@ public class Pessoa {
         this.cpf = idPessoa;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public String getNome() {
         return nome;
     }
